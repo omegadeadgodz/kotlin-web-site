@@ -1,15 +1,15 @@
+import { createElement } from 'react';
+import { render } from 'react-dom';
 import kotlinPlayground from 'kotlin-playground';
 import $ from 'jquery';
 import 'whatwg-fetch';
-import { createElement } from 'react'
-import { hydrate } from 'react-dom'
-import '../com/search/search';
+import { initSearch } from '../com/search/search';
 import '../com/cities-banners';
 import GifPlayer from '../com/gif-player/gif-player';
 import CodeMirror from '../com/codemirror/CodeMirror';
-import './code-blocks'
+import './code-blocks';
 import '../com/head-banner';
-import '../../../@ktl-components/dist/header.css'
+import '../../../@ktl-components/dist/header.css';
 
 function trackEvent(event) {
   window.dataLayer = window.dataLayer || [];
@@ -101,13 +101,17 @@ function getPropsFromComment(node) {
   return {};
 }
 
-function initKTLComponentNode({ default: Component }, node) {
-  const props = getPropsFromComment(node);
-  hydrate(createElement(Component, props), node);
+function initKTLComponentNode({ default: Component }, additionalProps, node) {
+  debugger
+  const props = { ...getPropsFromComment(node), ...additionalProps };
+  const fake_node = document.createElement('div');
+  debugger
+  render(createElement(Component, props), fake_node);
+  node.replaceWith(fake_node.children[0]);
 }
 
-function initKTLComponents() {
-  const nodes = $('[data-ktl-type]').toArray().reduce((nodes, node) => {
+function initKTLComponent(nodes, props) {
+  const components = nodes.reduce((nodes, node) => {
     const name = node.getAttribute('data-ktl-type');
 
     nodes[name] = nodes[name] || [];
@@ -117,9 +121,11 @@ function initKTLComponents() {
   }, {});
 
   Promise.all(
-      Object.entries(nodes)
-          .map(([ name, values ]) => import(`../../../@ktl-components/dist/${name}.js`)
-          .then(module => values.map(node => initKTLComponentNode(module, node))))
+      Object.entries(components)
+          .map(([ name, values ]) => (
+              import(`../../../@ktl-components/dist/${name}.js`)
+                .then(module => values.map(node => initKTLComponentNode(module, props || {}, node)))
+          ))
   );
 }
 
@@ -134,5 +140,12 @@ $(function () {
   addNavigatorType();
   initHeadingAnchors();
   initGifPlayer();
-  initKTLComponents();
+
+  const { openPopup } = initSearch();
+  debugger
+  initKTLComponent(
+      $('[data-ktl-type=header]').toArray(),
+      { onSearchClick: openPopup }
+  );
 });
+

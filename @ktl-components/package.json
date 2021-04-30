@@ -27,5 +27,9 @@
     "url-loader": "^4.1.1",
     "webpack": "^5.30.0",
     "webpack-cli": "^4.6.0"
+  },
+  "dependencies": {
+    "preact": "^10.5.13",
+    "preact-render-to-string": "^5.1.19"
   }
 }

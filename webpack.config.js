@@ -44,12 +44,12 @@ module.exports = (params = {}) => {
 
     mode: env,
 
-    resolve: {
-      alias: {
-        'react': 'preact/compat',
-        'react-dom': 'preact/compat',
-      },
-    },
+    // resolve: {
+    //   alias: {
+    //     'react': 'preact/compat',
+    //     'react-dom': 'preact/compat',
+    //   },
+    // },
 
     module: {
       rules: [

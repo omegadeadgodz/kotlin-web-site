@@ -19,16 +19,9 @@ export default function createConfig(outputPath) {
             extensions: [".js", ".json", ".jsx", ".css"],
         },
         externals: {
-            'react': {
-                root: 'React',
-                commonjs: 'react',
-                commonjs2: 'react',
-            },
-            'react-dom': {
-                root: 'ReactDOM',
-                commonjs: 'react-dom',
-                commonjs2: 'react-dom',
-            },
+            'React': 'react',
+            'react': 'react',
+            'react-dom': 'react-dom',
         },
         stats: {
             children: true,

@@ -1,5 +1,3 @@
-import { resolve } from 'path';
-
 import { createElement } from 'react';
 import { renderToString } from 'react-dom/server';
 
