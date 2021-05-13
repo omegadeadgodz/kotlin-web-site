@@ -39,7 +39,7 @@ class KTLComponentExtension(Extension):
 
         nodejs = subprocess.Popen(
             ["node", "compile.js", name, props_json],
-            cwd="@ktl-components",
+            cwd="scripts/react-renderer",
             stdin=subprocess.PIPE,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE

@@ -102,12 +102,10 @@ function getPropsFromComment(node) {
 }
 
 function initKTLComponentNode({ default: Component }, additionalProps, node) {
-  debugger
   const props = { ...getPropsFromComment(node), ...additionalProps };
   const fake_node = document.createElement('div');
-  debugger
   render(createElement(Component, props), fake_node);
-  node.replaceWith(fake_node.children[0]);
+  node.replaceWith(fake_node); // TODO: preact render to node
 }
 
 function initKTLComponent(nodes, props) {
@@ -142,7 +140,7 @@ $(function () {
   initGifPlayer();
 
   const { openPopup } = initSearch();
-  debugger
+
   initKTLComponent(
       $('[data-ktl-type=header]').toArray(),
       { onSearchClick: openPopup }

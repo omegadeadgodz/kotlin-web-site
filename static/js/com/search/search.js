@@ -72,6 +72,7 @@ export function initSearch() {
   const $input = $('.ais-search-box input');
 
   function openPopup() {
+    debugger
     if (!isInited) {
       search.start();
       isInited = true;
@@ -132,6 +133,7 @@ export function initSearch() {
   });
 
   const urlParameters = UrlUtils.parse(UrlUtils.extract(window.location.href));
+
   if ('q' in urlParameters && urlParameters.q !== '') {
     openPopup();
   }

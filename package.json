@@ -39,6 +39,7 @@
     "nunjucks": "3.2.2",
     "nunjucks-loader": "3.0.0",
     "postcss-custom-properties": "10.0.0",
+    "postcss-font-smoothing": "0.1.0",
     "postcss-loader": "3.0.0",
     "query-string": "3.0.0",
     "react": "17.0.2",

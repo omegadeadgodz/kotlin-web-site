@@ -11,7 +11,7 @@ export default function createConfig(outputPath) {
             header: "./components/header",
         },
         output: {
-            path: outputPath || resolve(__dirname, './dist'),
+            path: outputPath || resolve(__dirname, 'dist'),
             libraryTarget: "commonjs2",
             clean: true,
         },
@@ -19,9 +19,16 @@ export default function createConfig(outputPath) {
             extensions: [".js", ".json", ".jsx", ".css"],
         },
         externals: {
-            'React': 'react',
-            'react': 'react',
-            'react-dom': 'react-dom',
+            'react': {
+                root: 'React',
+                commonjs2: 'react',
+                commonjs: 'react'
+            },
+            'react-dom': {
+                root: 'ReactDOM',
+                commonjs2: 'react-dom',
+                commonjs: 'react-dom'
+            },
         },
         stats: {
             children: true,
@@ -74,7 +81,10 @@ export default function createConfig(outputPath) {
                             loader: "postcss-loader",
                             options: {
                                 postcssOptions: {
-                                    plugins: [ "postcss-preset-env" ],
+                                    plugins: [
+                                        "postcss-preset-env",
+                                        "postcss-font-smoothing"
+                                    ],
                                 },
                             },
                         }

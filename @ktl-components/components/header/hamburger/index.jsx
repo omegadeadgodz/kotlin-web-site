@@ -1,4 +1,4 @@
-import { Fragment } from 'react'
+import { Fragment, useCallback } from 'react'
 import Button from './Button';
 import Link from '../Link';
 
@@ -42,9 +42,14 @@ function MenuPopup({ data, id }) {
 export default function MenuButton({className, data}) {
     const id = 'ktl-open-nav-menu';
 
+    const handleClick = useCallback(e => {
+        e.preventDefault();
+        debugger
+    }, []);
+
     return (
         <Fragment>
-            <Button className={className} id={id}/>
+            <Button className={className} id={id} onClick={handleClick}/>
             <MenuPopup id={id} data={data}/>
         </Fragment>
     );

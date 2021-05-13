@@ -60,7 +60,7 @@ const defaultData = [
     },
 ];
 
-export default function Header({ navigationData, releaseUrl, version, onClick, ...props }) {
+export default function Header({ navigationData, releaseUrl, version, onSearchClick, ...props }) {
     const data = navigationData || defaultData;
 
     return (
@@ -68,7 +68,7 @@ export default function Header({ navigationData, releaseUrl, version, onClick, .
             <Brand version={version} url={releaseUrl}/>
             <Navigation className={cssNav} data={data}/>
             <div className={cssControls}>
-                <SearchButton onClick={onClick}/>
+                <SearchButton onClick={onSearchClick}/>
                 <HamburgerMenu className={cssMenu} data={data}/>
             </div>
         </header>
