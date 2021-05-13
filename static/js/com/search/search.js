@@ -72,7 +72,6 @@ export function initSearch() {
   const $input = $('.ais-search-box input');
 
   function openPopup() {
-    debugger
     if (!isInited) {
       search.start();
       isInited = true;

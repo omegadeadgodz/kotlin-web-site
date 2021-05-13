@@ -1,9 +1,10 @@
-import { Fragment, useCallback } from 'react'
+import { Fragment, useCallback, useState } from 'react'
 import Button from './Button';
 import Link from '../Link';
 
 import {
     mobilePopup as cssMobilePopup,
+    mobilePopupOpened as cssMobilePopupOpened,
     item as cssItem, heading as cssHeading,
     subItem as cssSubItem, subHeading as cssSubHeading
 } from './hamburger.css';
@@ -22,11 +23,11 @@ function SubMenu({ data }) {
     );
 }
 
-function MenuPopup({ data, id }) {
+function MenuPopup({ data, id, opened }) {
     const list = data || [];
 
     return (
-        <nav id={id} className={cssMobilePopup}>
+        <nav id={id} className={cssMobilePopup + (opened ? ` ${cssMobilePopupOpened}` : '')}>
             <ul>{
                 list.map(({items, ...item}, i) => (
                     <li key={i} className={cssItem}>
@@ -42,15 +43,17 @@ function MenuPopup({ data, id }) {
 export default function MenuButton({className, data}) {
     const id = 'ktl-open-nav-menu';
 
+    const [isOpened, setState] = useState(false);
+
     const handleClick = useCallback(e => {
         e.preventDefault();
-        debugger
-    }, []);
+        setState(!isOpened);
+    }, [ isOpened ]);
 
     return (
         <Fragment>
             <Button className={className} id={id} onClick={handleClick}/>
-            <MenuPopup id={id} data={data}/>
+            <MenuPopup id={id} data={data} opened={isOpened}/>
         </Fragment>
     );
 }

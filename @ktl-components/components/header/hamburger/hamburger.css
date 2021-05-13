@@ -12,11 +12,15 @@
 
 .heading, .heading:any-link {
     font-family: Inter, Arial, sans-serif;
-    color: #fff;
+    color: rgba(255, 255, 255, 0.75);
     font-size: 20px;
     font-weight: 600;
     line-height: 32px;
     text-decoration: none;
+}
+
+.heading:any-link:hover {
+    color: #fff;
 }
 
 .sub-heading, .sub-heading:any-link {
@@ -53,7 +57,7 @@
 }
 
 @media (max-width: 700px) {
-    .mobile-popup:target {
+    .mobile-popup:target, .mobile-popup--opened {
         display: block;
     }
 }
